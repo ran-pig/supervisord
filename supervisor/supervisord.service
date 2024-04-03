@@ -1,0 +1,15 @@
+[Unit]
+Description=supervisord service in golang
+After=network.target
+
+[Service]
+Type=simple
+User=root
+StartLimitInterval=10
+StartLimitBurst=10
+ExecStart=/bin/bash -c 'for ((i=1; i<=30; i++));do echo $i; sleep 1; done && cd {{AYSaaSEomsPath}} && ./aysaasSupervisor'
+Restart=always
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target
