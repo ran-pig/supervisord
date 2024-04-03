@@ -82,12 +82,15 @@
         });
     };
 
-    function stopProgram( programName ) {
+    function stopProgram( programName, action ) {
+        if (action != 'ReStart'){
+            action = 'Stop'
+        }
         return new Promise((resolve, reject) =>{
-            confirm_dialog( { 'title': "Stop confirmation",
-                'message': "Do you really want to stop program?",
+            confirm_dialog( { 'title': action + " confirmation",
+                'message': "Do you really want to "+ action.toLowerCase() +" program?",
                 'cancel-text': "Cancel",
-                'confirm-text': "Stop",
+                'confirm-text': action,
                 'confirm-onclick': async function() {
                     await doStopProgram( programName );
                     resolve("success");
@@ -97,7 +100,7 @@
     }
 
     async function restartProgram( programName ){
-        await stopProgram(programName)
+        await stopProgram(programName, 'ReStart')
         startProgram(programName)
 
     }
@@ -334,8 +337,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="my-modal-title">Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                 <p id="my-modal-message">Do you want to save changes you made to document before closing?</p>
