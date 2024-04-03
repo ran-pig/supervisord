@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path"
 	"strings"
 	"sync"
 
@@ -89,6 +90,14 @@ func (l *FileLogger) openFile(trunc bool) error {
 		l.file.Close()
 	}
 	var err error
+
+	dirPath := path.Dir(l.name)
+	_, err = os.Stat(dirPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			_ = os.MkdirAll(dirPath, 0644)
+		}
+	}
 	fileInfo, err := os.Stat(l.name)
 
 	if trunc || err != nil {

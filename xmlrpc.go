@@ -194,7 +194,7 @@ func (p *XMLRPC) startHTTPServer(user string, password string, protocol string, 
 				_ = os.MkdirAll(dir, 0644)
 			}
 		}
-		log.WithFields(log.Fields{"dir": dir}).Info("storage log directory")
+		log.WithFields(log.Fields{"dir": dir, "program": realName}).Info("storage log directory")
 		mux.Handle("/log/"+realName+"/", http.StripPrefix("/log/"+realName+"/", http.FileServer(http.Dir(dir))))
 	}
 
