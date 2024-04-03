@@ -3,7 +3,6 @@ package main
 import (
 	"crypto/sha1" //nolint:gosec
 	"encoding/hex"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -189,7 +188,13 @@ func (p *XMLRPC) startHTTPServer(user string, password string, protocol string, 
 			continue
 		}
 		dir := filepath.Dir(filePath)
-		fmt.Println(dir)
+		_, err := os.Stat(dir)
+		if err != nil {
+			if os.IsNotExist(err) {
+				_ = os.MkdirAll(dir, 0644)
+			}
+		}
+		log.WithFields(log.Fields{"dir": dir}).Info("storage log directory")
 		mux.Handle("/log/"+realName+"/", http.StripPrefix("/log/"+realName+"/", http.FileServer(http.Dir(dir))))
 	}
 
