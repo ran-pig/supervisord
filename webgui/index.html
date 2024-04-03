@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Go-Supervisor</title>
+    <title>AYSaaSEoms-Supervisor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-table.css"/>
@@ -53,7 +53,7 @@
         $.ajax( {
             type: "POST",
             dataType: "json",
-            url: "/program/start/" + name,
+            url: "program/start/" + name,
             success: function( data, status, jqXHR  ) {
                 if( data['success'] ) {
                     changeProgramState( name, "RUNNING" );
@@ -108,7 +108,7 @@
                 $.ajax( {
                     type: "POST",
                     dataType: "json",
-                    url: "/program/stop/" + name,
+                    url: "program/stop/" + name,
                     success: function( data, status, jqXHR  ) {
                         if( data['success'] ) {
                             changeProgramState( name, 'STOPPED' );
@@ -158,7 +158,7 @@
                 action = action + '<button type="button" disabled class="btn btn-primary mr-1" onclick="restartProgram(\'' + programs[i]['name'] + '\');">ReStart</button>';
                 color = "red";
             }
-            let logLabel = '<a href=/log?name=' + programs[i]['name'] + '>日志列表 </a>';
+            let logLabel = '<a href=log?name=' + programs[i]['name'] + '>日志列表 </a>';
 
             action = action + logLabel;
 
@@ -191,7 +191,7 @@
             'confirm-onclick': function() {
                 $.ajax( {
                     type: "PUT",
-                    url: "/supervisor/shutdown",
+                    url: "supervisor/shutdown",
                     contentType: "application/json",
                     dataType: "text",
                     success: function( data, status, jqXHR ) {
@@ -213,7 +213,7 @@
             'confirm-onclick': function() {
                 $.ajax( {
                     type: "POST",
-                    url: "/supervisor/reload",
+                    url: "supervisor/reload",
                     contentType: "application/json",
                     dataType: "text",
                     success: function( data, status, jqXHR ) {
@@ -245,7 +245,7 @@
         }
         $.ajax( {
             type: "POST",
-            url: "/program/startPrograms",
+            url: "program/startPrograms",
             contentType: "application/json",
             data: JSON.stringify( programs ),
             dataType: "text",
@@ -266,7 +266,7 @@
         }
         $.ajax( {
             type: "POST",
-            url: "/program/stopPrograms",
+            url: "program/stopPrograms",
             contentType: "application/json",
             data: JSON.stringify( programs ),
             dataType: "text",
@@ -283,7 +283,7 @@
     function list_programs() {
         $.ajax({
             type: "GET",
-            url: "/program/list",
+            url: "program/list",
             dataType: "json",
             success: function( data, status, jqXHR ) {
                 programs = data;
@@ -300,13 +300,13 @@
     });
 </script>
 <body>
-<H1 class="text-center text-success">Go-Supervisor</H1>
+<H1 class="text-center text-success">AYSaaSEoms-Supervisor</H1>
 <div class="container">
     <div class='row'>
         <div class="col-12">
 
-            <a href="http://10.234.254.27:9996/graph" class="text-decoration-none mr-3" target="_blank">Prometheus</a>
-            <a href="http://127.0.0.1:3000" class="text-decoration-none" target="_blank">Grafana</a>
+<!--            <a href="http://10.234.254.27:9996/graph" class="text-decoration-none mr-3" target="_blank">Prometheus</a>-->
+<!--            <a href="http://127.0.0.1:3000" class="text-decoration-none" target="_blank">Grafana</a>-->
 
             <input type="button" class="btn btn-primary float-right mr-1" value="Shutdown" onclick='shutdown_supervisor();'>
             <input type="button" class="btn btn-primary float-right mr-1" value="Reload" onclick='reload_supervisor();'>

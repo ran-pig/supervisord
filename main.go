@@ -111,7 +111,9 @@ func findSupervisordConf() (string, error) {
 		"/etc/supervisord.conf",
 		"/etc/supervisor/supervisord.conf",
 		"../etc/supervisord.conf",
-		"../supervisord.conf"}
+		"../supervisord.conf",
+		"./supervisord.conf",
+		"./supervisor/supervisord.conf"}
 
 	for _, file := range possibleSupervisordConf {
 		if _, err := os.Stat(file); err == nil {

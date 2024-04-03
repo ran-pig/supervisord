@@ -28,13 +28,13 @@
             return
         }
 
-        axios.get("/log/" + name).then(function (response) {
+        axios.get("log/" + name).then(function (response) {
             console.log(response.data)
             $("#app").html(response.data)
 
             $("a").each(function(){
                 $old_url = $(this).attr('href');
-                $new_url = '/log/' + name +"/" +$old_url;
+                $new_url = 'log/' + name +"/" +$old_url;
                 $(this).attr('href',$new_url);//changed this line
                 console.log($new_url)
             });

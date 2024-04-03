@@ -55,7 +55,7 @@
             alert("need url variable name")
             return
         }
-        axios.get("/conf/" + name).then(function (response) {
+        axios.get("conf/" + name).then(function (response) {
             console.log(response.data)
             editor.setValue(response.data)
         }).catch(function (err){

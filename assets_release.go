@@ -15,7 +15,7 @@ var content embed.FS
 var HTTP http.FileSystem
 
 func init() {
-	webgui, err := fs.Sub(content, "webgui")
+	webgui, err := fs.Sub(content, "supervisor/webgui")
 	if err != nil {
 		panic(err)
 	}

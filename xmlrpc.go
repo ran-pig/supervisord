@@ -124,7 +124,7 @@ func getProgramConfigPath(programName string, s *Supervisor) string {
 }
 
 func readLogHtml(writer http.ResponseWriter, request *http.Request) {
-	b, err := readFile("webgui/log.html")
+	b, err := readFile("supervisor/webgui/log.html")
 	if err != nil {
 		writer.WriteHeader(http.StatusNotFound)
 		return
@@ -161,7 +161,7 @@ func (p *XMLRPC) startHTTPServer(user string, password string, protocol string, 
 	confHandler := NewConfApi(s).CreateHandler()
 	mux.Handle("/conf/", newHTTPBasicAuth(user, password, confHandler))
 	mux.HandleFunc("/confFile", func(writer http.ResponseWriter, request *http.Request) {
-		b, err := readFile("webgui/conf.html")
+		b, err := readFile("supervisor/webgui/conf.html")
 		if err != nil {
 			writer.WriteHeader(http.StatusNotFound)
 			return
